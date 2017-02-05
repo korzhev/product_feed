@@ -1,0 +1,8 @@
+[
+  {
+    "name": "apodiscounter", "url": "http://www.apodiscounter.de/partnerprogramme/krn.csv", "delimiter": ";"
+  },
+  {
+    "name": "eurapon", "url": "http://preisexporte.apobyte.de/www.eurapon.de/preissuchmaschine/preissuchmaschine.csv", "delimiter": "\t"
+  }
+]
