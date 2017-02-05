@@ -62,15 +62,15 @@ module.exports = class FeedParser {
 
     /**
      * run parsing and return data
-     * @returns {Promise.<T>}
+     * @returns {Promise}
      */
     parse() {
-        return this._promisifyParser()
-            .catch((e) => {
-                console.error(e);
-                const res = {};
-                res[this.name] = {};
-                return res;
-            });
+        return this._promisifyParser();
+            // .catch((e) => {
+            //     console.error(e);
+            //     const res = {};
+            //     res[this.name] = {};
+            //     return res;
+            // });
     }
 };
