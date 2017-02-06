@@ -1,10 +1,13 @@
 import React from 'react';
+import NewFeedForm from './NewFeedForm';
+import FeedSelector from './FeedSelector';
 
 
 function App() {
     return (
         <div>
-            {'Hello!!!'}
+            <FeedSelector feeds={[]} />
+            <NewFeedForm />
         </div>
     );
 }
