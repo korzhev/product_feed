@@ -1,3 +1,4 @@
+/* global document */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,5 +8,5 @@ render(
     <Provider store={{}}>
         <App />
     </Provider>,
-    document.getElementById('root'), // eslint-disable-line no-undef
+    document.getElementById('root'),
 );
