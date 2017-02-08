@@ -64,10 +64,12 @@ module.exports = function () {
             port: 8000,
             inline: true,
             hot: true,
-            proxy: [{
-                path: '/api/',
-                target: 'http://localhost:3000',
-            }],
+            proxy: {
+                '/api': {
+                    target: 'http://localhost:3000',
+                    pathRewrite: { '^/api': '' },
+                },
+            },
             stats: {
                 assets: true,
                 children: false,

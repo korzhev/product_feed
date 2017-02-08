@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addFeed } from '../action_creators/feeds';
 
 const delimiterList = [
         { value: '\t', label: 'Tab'},
@@ -24,7 +26,7 @@ class NewFeedForm extends Component {
 
     handleSubmit = ev => {
         ev.preventDefault();
-        // this.props.addFeed(this.state);
+        this.props.addFeed(this.state);
         this.setState({
             name: '',
             url: '',
@@ -74,4 +76,4 @@ class NewFeedForm extends Component {
     }
 }
 
-export default NewFeedForm;
+export default connect(() => ({}), { addFeed })(NewFeedForm);

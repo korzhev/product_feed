@@ -32,7 +32,7 @@ class HttpErr extends Error {
  */
 function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
     res.status(err.status || 500);
-    console.error(err);
+    // console.error(err);
     res.json({ status: err.status || 500, message: err.message });
 }
 
@@ -68,7 +68,7 @@ function runExpress(store) {
         const url = req.body.url;
         const delimiter = req.body.url;
         if (!(name && url && delimiter)) return next(new HttpErr(400, 'All params are required!'));
-        if (res.storage[name]) return next(new HttpErr(400, 'Storage with this name is already existed!'));
+        if (storage[name]) return next(new HttpErr(400, 'Storage with this name is already existed!'));
         // if params OK, starting to parse
         const feedParser = new FP({ name, url, delimiter });
         feedParser.parse()

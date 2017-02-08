@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loadProducts } from '../action_creators/feeds';
 
-export default class FeedSelector extends Component {
+class FeedSelector extends Component {
+
+    handleClick = ev => {
+        ev.preventDefault();
+        this.props.loadProducts(this.state);
+    };
+
     render() {
         const feedsList = this.props.feeds.map(f => {
             return (
                 <li key={f.name}>
-                    <a href={`?shop=${f.name}`}>
+                    <a href={`?shop=${f.name}`} onClick={this.handleClick}>
                         {`Feed "${f.name}" from "${f.url}" delimiter: "${f.delimiter}"`}
                     </a>
                 </li>
@@ -13,10 +21,10 @@ export default class FeedSelector extends Component {
         });
         return (
             <div className="ui segment">
-                <ul>
-                    {feedsList}
-                </ul>
+                {this.props.feeds.length ? <ul>{feedsList}</ul>: <h5>Add some feeds</h5>}
             </div>
         );
     }
 }
+
+export default connect(state => ({ feeds: state.feeds }), { loadProducts })(FeedSelector);
