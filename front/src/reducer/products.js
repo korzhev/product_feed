@@ -1,9 +1,9 @@
 /* global alert */
 import { SUCCESS, FAIL, LOAD_PRICE, LOAD_PRODUCTS } from '../constants';
 
-const defaultProducts = [];
+const defaultProducts = {shop: null, idList: []};
 
-export default (idList = defaultProducts, action) => {
+export default (products = defaultProducts, action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -12,15 +12,15 @@ export default (idList = defaultProducts, action) => {
 
     case LOAD_PRODUCTS + FAIL:
         alert(JSON.stringify(payload, null, 2));
-        return [];
+        return {shop: null, idList: []};
     case LOAD_PRICE + SUCCESS:
         alert(JSON.stringify(payload, null, 2));
-        return idList;
+        return products;
 
     case LOAD_PRICE + FAIL:
         alert(JSON.stringify(payload, null, 2));
-        return idList;
+        return products;
     }
 
-    return idList;
+    return products;
 };

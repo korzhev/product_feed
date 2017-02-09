@@ -26,7 +26,7 @@ export function addFeed(feed) {
             }
             dispatch({
                 type: LOAD_PRODUCTS + SUCCESS,
-                payload: { shop: feed.shop, idList: result[0] },
+                payload: { shop: feed.name, idList: result[0] },
             });
             return dispatch({
                 type: ADD_FEED + SUCCESS,

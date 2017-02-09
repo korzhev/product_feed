@@ -5,6 +5,7 @@ import ProductIdItem from './ProductIdItem';
 
 class ProductIdList extends Component {
     render() {
+        console.log(this.props)
         const items = this.props.idList.map(id => <ProductIdItem key={id} id={id} shop={this.props.shop} />);
         return (
             <div className="ui segment">
@@ -16,4 +17,5 @@ class ProductIdList extends Component {
     }
 }
 
-export default connect(state => ({ idList: state.products }))(ProductIdList);
+export default connect(state => state.products)(ProductIdList);
+//export default connect(state => ({ idList: state.products.idList, shop: state.products.state }))(ProductIdList);

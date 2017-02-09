@@ -18,7 +18,6 @@ class NewFeedForm extends Component {
     };
 
     handleChange = field => ev => {
-        if (ev.target.value.length > 5) return
         this.setState({
             [field]: ev.target.value
         })
