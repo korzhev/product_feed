@@ -5,7 +5,6 @@ import ProductIdItem from './ProductIdItem';
 
 class ProductIdList extends Component {
     render() {
-        console.log(this.props)
         const items = this.props.idList.map(id => <ProductIdItem key={id} id={id} shop={this.props.shop} />);
         return (
             <div className="ui segment">

@@ -1,5 +1,5 @@
 /* global fetch, alert */
-import { SUCCESS, FAIL, ADD_FEED, LOAD_PRODUCTS } from '../constants';
+import { SUCCESS, FAIL, ADD_FEED, LOAD_PRODUCTS, LOAD_FEEDS } from '../constants';
 
 export function addFeed(feed) {
     return (dispatch) => {
@@ -66,6 +66,36 @@ export function loadProducts(shop) {
         }).catch((e) => {
             return dispatch({
                 type: LOAD_PRODUCTS + FAIL,
+                payload: { status: 500, message: e.message },
+            });
+        });
+    };
+}
+
+export function loadFeeds(shop) {
+    return (dispatch) => {
+        fetch('/api/feeds', {
+            method: 'GET',
+        }).then((response) => {
+            return Promise.all([
+                response.json(),
+                response.ok,
+            ]);
+        }).then((result) => {
+            if (!result[1]) {
+                return dispatch({
+                    type: LOAD_FEEDS + FAIL,
+                    payload: result[0],
+                });
+            }
+            return dispatch({
+                type: LOAD_FEEDS + SUCCESS,
+                payload: result[0],
+            });
+
+        }).catch((e) => {
+            return dispatch({
+                type: LOAD_FEEDS + FAIL,
                 payload: { status: 500, message: e.message },
             });
         });

@@ -8,6 +8,8 @@ const FP = require('./feed_parser');
 // // create Parsers
 // const fpList = feedsList.map(feed => new FP(feed));
 
+const LIMIT_PRODUCT_NUMBER = 10;
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -44,6 +46,7 @@ function runExpress(store) {
     // use cached feed
     // let storage = store || require('./cached_feed.json'); // eslint-disable-line global-require
     const storage = store;
+    const feedsList = [];
 
     // main handler
     app.get('/', (req, res, next) => {
@@ -57,7 +60,7 @@ function runExpress(store) {
                 if (product) return res.json(product);
                 return next(new HttpErr(404, 'Not found!'));
             }
-            return res.json(Object.keys(products));
+            return res.json(Object.keys(products).slice(0, LIMIT_PRODUCT_NUMBER));
         }
         return next(new HttpErr());
     });
@@ -73,13 +76,18 @@ function runExpress(store) {
         const feedParser = new FP({ name, url, delimiter });
         feedParser.parse()
             .then((result) => {
+                feedsList.push({ name, url, delimiter });
                 // merge parsed data to global store
                 Object.assign(storage, result);
-                console.log(result)
                 return Object.keys(result[name]);
             })
-            .then(products => res.json(products))
+            .then(products => res.json(products.slice(0, LIMIT_PRODUCT_NUMBER)))
             .catch(next);
+    });
+
+    // client gets feeds if page reloaded
+    app.get('/feeds', (req, res) => {
+        res.json(feedsList);
     });
 
     // custom error middleware

@@ -32,12 +32,15 @@ module.exports = class FeedParser {
             })
             // save in storage only needed data
             .on('data', (data) => {
-                const tmp = {};
-                tmp[data.PZN] = data.Preis;
-                this.storage[data.PZN] = tmp;
+                if (data.PZN && data.Preis) {
+                    const tmp = {};
+                    tmp[data.PZN] = data.Preis;
+                    this.storage[data.PZN] = tmp;
+                }
             })
             .on('end', () => {
                 console.info(`Feed "${this.name}" parsing is done!`);
+                if (!Object.keys(this.storage).length) return rej(new Error('Result is empty, check delimiter'))
                 const result = {};
                 // prepare result for easy
                 result[this.name] = this.storage;

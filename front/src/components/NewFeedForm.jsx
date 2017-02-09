@@ -35,7 +35,7 @@ class NewFeedForm extends Component {
 
     render() {
         const options = delimiterList.map((o, i) => {
-            return <option key={i} value={o.value}>{o.label}</option>
+            return <option key={i} value={o.value} >{o.label}</option>
         });
         return (
             <div className="ui segment">
@@ -64,7 +64,7 @@ class NewFeedForm extends Component {
                     </div>
                     <div className='field'>
                         <label>Delimiter</label>
-                        <select name='delimiter' onChange = {this.handleChange('delimiter')} defaultValue={'\t'}>
+                        <select name='delimiter' onChange={this.handleChange('delimiter')} value={this.state.delimiter}>
                             {options}
                         </select>
                     </div>

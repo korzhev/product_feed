@@ -3,7 +3,6 @@ import { SUCCESS, FAIL, LOAD_PRICE } from '../constants';
 
 export function loadPrice(shop, id) {
     return (dispatch) => {
-        alert('Please wait until result');
         fetch(`/api?shop=${shop}&product_id=${id}`, {
             method: 'GET',
         }).then((response) => {
@@ -20,7 +19,7 @@ export function loadPrice(shop, id) {
             }
             return dispatch({
                 type: LOAD_PRICE + SUCCESS,
-                payload: feed,
+                payload: result[0],
             });
         }).catch((e) => {
             return dispatch({
