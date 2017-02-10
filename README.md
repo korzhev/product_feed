@@ -16,7 +16,7 @@ go to [http://localhost:8000](http://localhost:8000)
 * be patient when requesting, csv files in example are huge, parsing will take a while(1-20 seconds)
 * there aren't preloaders :cold_sweat: wait for alert please
 * product_id response is limited to 10 items to make DOM render fast
-* you can change product_id response limit at `server\api_parser.js:11`
+* you can change product_id response limit at `server\api_server.js:11`
 * if you having problems with running frontend from fast command: you need webpack2 + webpack-dev-server
 * tested on linux with node 7.4 + npm4 and latest chrome
 * server runs on port: 3000 
